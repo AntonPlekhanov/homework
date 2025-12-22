@@ -1,0 +1,10 @@
+SELECT product_name, quantity, price
+FROM order_items
+JOIN orders ON orders.id = order_items.order_id 
+WHERE orders.id = '1'
+ORDER BY price DESC
+
+
+Successfully run. Total query runtime: 81 msec.
+2 rows affected.
+

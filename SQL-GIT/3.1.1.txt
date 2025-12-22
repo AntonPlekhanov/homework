@@ -1,0 +1,12 @@
+INSERT INTO order_items (order_id, product_name, price, quantity)
+SELECT 
+    (SELECT id FROM orders ORDER BY random() LIMIT 1) AS order_id,
+    'Товар ' || (ROW_NUMBER() OVER (ORDER BY random()) % 500 + 1) AS product_name,
+    (FLOOR(random() * (100000 - 100 + 1)) + 100) AS price,
+    (FLOOR(random() * 10) + 1) AS quantity
+FROM generate_series(1, 1000000);
+
+
+INSERT 0 1000000
+
+Query returned successfully in 15 secs 519 msec.

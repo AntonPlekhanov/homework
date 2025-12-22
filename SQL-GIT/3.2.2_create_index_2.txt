@@ -1,0 +1,6 @@
+CREATE INDEX idx_order_id_price ON order_items(order_id, price)
+
+
+CREATE INDEX
+
+Query returned successfully in 1 secs 808 msec.

@@ -1,0 +1,10 @@
+SELECT name, SUM(quantity * price) AS total_spent
+FROM customers
+JOIN orders ON customers.id = orders.customer_id 
+JOIN order_items ON orders.id = order_items.order_id 
+GROUP BY customers.id, customers.name
+HAVING SUM(quantity * price) > 5000
+
+
+Successfully run. Total query runtime: 77 msec.
+4 rows affected.

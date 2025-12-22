@@ -1,0 +1,28 @@
+INSERT INTO customers (name, email)
+VALUES
+('Антон Антонов', 'antonantonov@gmail.com')
+('Ирина Ирина', 'irinairina@gmail.com'),
+('Дмитрий Дмитриев', 'dmitriydmitriev@gmail.com'),
+('Елена Еленина', 'elenaelenina@gmail.com'),
+('Сергей Сергеев', 'sergeisergeev@gmail.com'),
+('Мария Марьина', 'mariamaryina@gmail.com'),
+('Александр Александров', 'alexanderalexandrov@gmail.com'),
+('Наталья Натальевна', 'natalyanatalyevna@gmail.com'),
+('Кирилл Кириллов', 'kirillkirillov@gmail.com'),
+('Ольга Ольгина', 'olgoolgina@gmail.com'),
+('Максим Максимов', 'maksimmaksimov@gmail.com'),
+('Татьяна Татьянова', 'tatyanatatyanova@gmail.com'),
+('Роман Романов', 'romanromanov@gmail.com'),
+('Анастасия Анастасиева', 'anastasiyaanastasieva@gmail.com'),
+('Светлана Светланова', 'svetlanasvetlanova@gmail.com'),
+('Юлия Юлиева', 'yuliyuliyeva@gmail.com'),
+('Федор Федоров', 'fedorfedorov@gmail.com'),
+('Григорий Григорьев', 'grigorygrigoryev@gmail.com'),
+('Ярослав Ярославович', 'yaroslavyaroslavovich@gmail.com'),
+('Денис Денисов', 'denisdenisov@gmail.com')
+
+INSERT 0 69
+
+Query returned successfully in 59 msec.
+
+

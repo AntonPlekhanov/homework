@@ -1,0 +1,8 @@
+SELECT *
+FROM orders
+JOIN customers ON orders.customer_id  = customers.id
+WHERE name ='Иван Иванов'
+
+
+Successfully run. Total query runtime: 74 msec.
+2 rows affected

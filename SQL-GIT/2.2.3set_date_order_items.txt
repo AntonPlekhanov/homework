@@ -1,0 +1,17 @@
+INSERT INTO order_items (order_id , product_name, quantity, price)
+VALUES
+(1, 'печенье яшкино', 1, 300),
+(1, 'теелвизор lg', 1, 40000),
+(2, 'сок добрый', 5, 600),
+(3, 'кола зеро', 4, 500),
+(4, 'твикс', 3, 80),
+(5, 'клавиатура', 2, 6000),
+(6, 'монитор asus', 1, 45000),
+(7, 'iphone17', 1, 1200000)
+
+
+
+
+INSERT 0 2
+
+Query returned successfully in 86 msec.

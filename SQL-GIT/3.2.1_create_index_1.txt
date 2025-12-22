@@ -1,0 +1,6 @@
+CREATE INDEX idx_customer_id ON orders(customer_id)
+
+
+CREATE INDEX
+
+Query returned successfully in 62 msec.

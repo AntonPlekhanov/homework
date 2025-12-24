@@ -1,0 +1,71 @@
+Базовые фильтры
+1)
+Author.objects.filter(first_name='John')  
+<QuerySet [<Author: John Green>, <Author: John Gick>, <Author: John Doe>]>
+
+
+2)Author.objects.exclude(last_name='Doe')
+<QuerySet [<Author: John Green>, <Author: John Gick>]>
+
+
+
+
+Числовые сравнения
+3)
+Book.objects.filter(price__lt=500)
+<QuerySet [<Book: paper towns by John Green>, <Book: "Harry Potter" by John Doe>, <Book: The Nick Adams stories by John Gick>]>
+
+
+4)
+Book.objects.filter(price__lte=300)
+<QuerySet [<Book: paper towns by John Green>]>
+
+
+5)
+Book.objects.filter(price__gt=1000)
+<QuerySet [<Book: "django Web Development Cookbook" by John Doe>, <Book: Python book by John Gick>]>
+
+
+6)
+Book.objects.filter(price__gte=750)
+<QuerySet [<Book: "Little Prince" by John Green>, <Book: "django Web Development Cookbook" by John Doe>, <Book: Python book by John Gick>]>
+
+
+
+Поиск текста
+7)
+Book.objects.filter(title__contains='django')
+<QuerySet [<Book: "django Web Development Cookbook" by John Doe>]>
+
+
+8)
+Book.objects.filter(title__icontains='python')
+<QuerySet [<Book: Python book by John Gick>]>
+
+
+9)
+Book.objects.filter(title__startswith='Advanced')
+<QuerySet []>
+
+
+10)
+Book.objects.filter(title__startswith='pro')
+<QuerySet [<Book: Promaster by Adam Smith>]>
+
+
+11)
+Book.objects.filter(title__endswith='Guide')
+<QuerySet [<Book: C++ Guide by Adam Smith>]>
+
+
+12)
+Book.objects.filter(title__iendswith='tutorial')
+<QuerySet [<Book: Tutorial by John Doe>]>
+
+
+
+
+
+
+
+

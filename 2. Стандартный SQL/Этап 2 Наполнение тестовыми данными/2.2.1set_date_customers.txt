@@ -1,0 +1,13 @@
+INSERT INTO customers (name, email)
+VALUES
+('Иван Иванов', 'ivanivanov@gmail.com'),
+('Никита Никитов', 'nikitanikitov@gmail.com'),
+('Андрей Андреев', 'andreyandreev@gmail.com')
+
+
+
+
+
+INSERT 0 3
+
+Query returned successfully in 73 msec.

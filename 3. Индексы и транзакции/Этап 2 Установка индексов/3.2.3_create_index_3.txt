@@ -1,0 +1,12 @@
+CREATE INDEX idx_product_name ON order_items(product_name)
+
+
+
+
+
+
+
+
+CREATE INDEX
+
+Query returned successfully in 2 secs 777 msec.

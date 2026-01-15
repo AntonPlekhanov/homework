@@ -1,0 +1,12 @@
+EXPLAIN ANALYZE 
+SELECT *
+FROM order_items
+WHERE price > 10000 and order_id = 123
+
+
+Index Scan using idx_order_id_price on order_items  (cost=0.42..6.19 rows=1 width=32) (actual time=0.041..0.041 rows=0 loops=1)
+Index Cond: ((order_id = 123) AND (price > '10000'::numeric))
+Planning Time: 1.182 ms
+Execution Time: 0.053 ms
+
+#индекс эффективен и испрльзуется, написано используется index Scan using idx_order_id_price on order_items,время выполнения запроса маленькое, что тоже хорошо

@@ -1,0 +1,9 @@
+DROP INDEX idx_customer_id
+
+
+
+DROP INDEX
+
+Query returned successfully in 83 msec.
+
+#Удалил индекс поскольку он не использовался,а значит в нем нет смысла

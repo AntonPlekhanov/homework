@@ -1,0 +1,287 @@
+Базовые фильтры
+1)
+Author.objects.filter(first_name='John')  
+<QuerySet [<Author: John Green>, <Author: John Gick>, <Author: John Doe>]>
+
+
+2)Author.objects.exclude(last_name='Doe')
+<QuerySet [<Author: John Green>, <Author: John Gick>]>
+
+
+
+
+Числовые сравнения
+3)
+Book.objects.filter(price__lt=500)
+<QuerySet [<Book: paper towns by John Green>, <Book: "Harry Potter" by John Doe>, <Book: The Nick Adams stories by John Gick>]>
+
+
+4)
+Book.objects.filter(price__lte=300)
+<QuerySet [<Book: paper towns by John Green>]>
+
+
+5)
+Book.objects.filter(price__gt=1000)
+<QuerySet [<Book: "django Web Development Cookbook" by John Doe>, <Book: Python book by John Gick>]>
+
+
+6)
+Book.objects.filter(price__gte=750)
+<QuerySet [<Book: "Little Prince" by John Green>, <Book: "django Web Development Cookbook" by John Doe>, <Book: Python book by John Gick>]>
+
+
+
+Поиск текста
+7)
+Book.objects.filter(title__contains='django')
+<QuerySet [<Book: "django Web Development Cookbook" by John Doe>]>
+
+
+8)
+Book.objects.filter(title__icontains='python')
+<QuerySet [<Book: Python book by John Gick>]>
+
+
+9)
+Book.objects.filter(title__startswith='Advanced')
+<QuerySet []>
+
+
+10)
+Book.objects.filter(title__startswith='pro')
+<QuerySet [<Book: Promaster by Adam Smith>]>
+
+
+11)
+Book.objects.filter(title__endswith='Guide')
+<QuerySet [<Book: C++ Guide by Adam Smith>]>
+
+
+12)
+Book.objects.filter(title__iendswith='tutorial')
+<QuerySet [<Book: Tutorial by John Doe>]>
+
+
+
+Проверка на null
+13)Review.objects.filter(Q(comment__isnull=True )| Q(comment=''))
+<QuerySet [<Review: Review for Python book - Rating: 10>, <Review: Review for C++ Guide - Rating: 9>, <Review: Review for The Nick Adams stories - Rating: 7>]>
+
+
+14)Review.objects.filter(Q(comment__isnull=False) & ~Q(comment=''))
+<QuerySet [<Review: Review for paper towns - Rating: 10>, <Review: Review for Tutorial - Rating: 7>]>
+
+
+
+IN и Range
+15)Author.objects.filter(id__in=[1,3,5])
+<QuerySet [<Author: John Green>, <Author: John Doe>, <Author: Anton Plekhanov>]>
+
+
+16)Book.objects.filter(published_date__range=('2023-01-01', '2023-12-31'))
+<QuerySet [<Book: The Nick Adams stories by John Gick>, <Book: "django Web Development Cookbook" by John Doe>]>
+
+
+
+Регулярные выражения
+17)Book.objects.filter(title__regex=r'^Python')
+<QuerySet [<Book: Python book by John Gick>]>
+
+
+18) Author.objects.filter(last_name__istartswith='Mc')
+<QuerySet []>
+
+
+
+Даты и время
+
+
+19)Book.objects.filter(published_date__year=2024)
+<QuerySet [<Book: paper towns by John Green>]>
+
+
+20)Book.objects.filter(published_date__month=6)
+<QuerySet [<Book: Python book by John Gick>]>
+
+
+21)Review.objects.filter(created_at__day=11)
+<QuerySet [<Review: Review for Python book - Rating: 10>, <Review: Review for C++ Guide - Rating: 9>, <Review: Review for The Nick Adams stories - Rating: 7>, <Review: Review for Tutorial - Rating: 7>]>
+
+
+22)Review.objects.filter(created_at__week=23)
+<QuerySet []>
+
+
+23) Review.objects.filter(created_at__week_day=2)
+<QuerySet [<Review: Review for paper towns - Rating: 10>]>
+
+
+24)Book.objects.filter(Q(published_date__month=4)| Q(published_date__month=5)| Q(published_date__month=6))
+<QuerySet [<Book: Python book by John Gick>]>
+
+
+25)Review.objects.filter(created_at__date=datetime(2026, 1, 11))
+<QuerySet [<Review: Review for Python book - Rating: 10>, <Review: Review for C++ Guide - Rating: 9>, <Review: Review for The Nick Adams stories - Rating: 7>, <Review: Review for Tutorial - Rating: 7>]>
+
+
+26)-
+
+
+27)Review.objects.filter(created_at__time__hour=13)
+<QuerySet [<Review: Review for paper towns - Rating: 10>]>
+#взял 13 вместо 15, так как знаю что такой есть.
+
+
+28)
+Review.objects.filter(created_at__time__minute=55)
+<QuerySet [<Review: Review for paper towns - Rating: 10>, <Review: Review for Tutorial - Rating: 7>]>
+
+
+29)Review.objects.filter(created_at__time__second=17)
+<QuerySet [<Review: Review for paper towns - Rating: 10>]>
+#взял 17 вместо 0, так как знаю что такая секунда есть.
+
+
+
+Связанные поля
+30)Book.objects.filter(author__email='author@example.com')
+<QuerySet [<Book: Promaster by Adam Smith>, <Book: C++ Guide by Adam Smith>]>
+
+
+31)Book.objects.filter(author__last_name__icontains='smith')
+<QuerySet [<Book: Promaster by Adam Smith>, <Book: C++ Guide by Adam Smith>]>
+
+
+32)Author.objects.annotate(books_count=Count('books')).filter(books_count__gt=2)
+<QuerySet [<Author: John Doe>]>
+#взял 2 вместо 5, потому что знаю что есть автор написавший 3 книги(это максимум среди количества книг у одного автора)
+
+
+
+JSON-поля
+33)-
+
+34)-
+#нет таких ключей
+
+
+Использование выражений F и Q
+35)Book.objects.filter(price=F('discount'))
+<QuerySet []>
+
+
+36)Book.objects.filter(price__gt=F('discount'))
+<QuerySet [<Book: paper towns by John Green>, <Book: "Harry Potter" by John Doe>, <Book: The Nick Adams stories by John Gick>, <Book: "Little Prince" by John Green>, <Book: "django Web Development Cookbook" by John Doe>, <Book: Python book by John Gick>, <Book: Promaster by Adam Smith>, <Book: C++ Guide by Adam Smith>, <Book: Tutorial by John Doe>]>
+
+
+37)Author.objects.filter(Q(first_name='Alice')|~Q(last_name='Brown'))
+<QuerySet [<Author: John Green>, <Author: John Gick>, <Author: John Doe>, <Author: Adam Smith>, <Author: Anton Plekhanov>]>
+#ни у кого нет фамилии Brown, так что просто выводит всех авторов
+
+
+
+Задания на аннотации
+38)res = Author.objects.annotate(books_count=Count('books'))
+for r in res:
+    ...:     print(r.first_name, r.last_name, r.books_count)
+
+Execution time: 0.000000s [Database: default]
+Anton Plekhanov 0
+Adam Smith 2
+John Doe 3
+John Gick 2
+John Green 2
+
+
+39)res = Book.objects.annotate(avg=Avg('reviews__rating'))
+for r in res:
+    ...:     print(r.title, r.avg)
+
+Execution time: 0.000000s [Database: default]
+paper towns 10.0
+"Little Prince" None
+The Nick Adams stories 7.0
+Python book 10.0
+"Harry Potter" None
+"django Web Development Cookbook" None
+Tutorial 7.0
+Promaster None
+C++ Guide 9.0
+
+
+40) res = Book.objects.annotate(fprice=F('price')-F('discount'))
+for r in res:
+    ...:     print(r.title, r.fprice)
+
+Execution time: 0.000000s [Database: default]
+paper towns 300
+"Harry Potter" 350
+The Nick Adams stories 345
+"Little Prince" 800
+"django Web Development Cookbook" 1500
+Python book 2000
+Promaster 100
+C++ Guide 200
+Tutorial 150
+
+
+
+Использование select_related и prefetch_related
+41) res = Book.objects.select_related('author')
+for r in res:
+    ...:     print(r.title,r.author.first_name,r.author.last_name)
+
+Execution time: 0.000000s [Database: default]
+paper towns John Green
+"Harry Potter" John Doe
+The Nick Adams stories John Gick
+"Little Prince" John Green
+"django Web Development Cookbook" John Doe
+Python book John Gick
+Promaster Adam Smith
+C++ Guide Adam Smith
+Tutorial John Doe
+
+
+42)res = Author.objects.prefetch_related('books').all()
+for r in res:
+    ...:     print(f'author:{r.first_name}{r.last_name}')
+    ...:     for book in r.books.all():
+    ...:         print(book.title)
+
+
+Execution time: 0.000000s [Database: default]
+author:JohnGreen
+paper towns
+"Little Prince"
+author:JohnGick
+The Nick Adams stories
+Python book
+author:JohnDoe
+"Harry Potter"
+"django Web Development Cookbook"
+Tutorial
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
